@@ -16,6 +16,10 @@ public class Application {
 	private URL licenses;
 	private URL changelog;	
 	private ArrayList<Release> releases;
+	
+	public Application() {
+		releases = new ArrayList<>();
+	}
 
 	@XmlAttribute
 	public String getName() {
@@ -49,10 +53,4 @@ public class Application {
 	public ArrayList<Release> getReleases() {
 		return releases;
 	}
-
-	public void setReleases(ArrayList<Release> releases) {
-		this.releases = releases;
-	}
-  
-  
 }

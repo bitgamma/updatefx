@@ -15,6 +15,10 @@ public class Release {
 	private String licenseVersion;	
 	private Date releaseDate;
 	private ArrayList<Binary> binaries;
+	
+	public Release() {
+		binaries = new ArrayList<>();
+	}
 
 	@XmlAttribute(required = true)
 	public String getId() {
@@ -55,9 +59,5 @@ public class Release {
 	@XmlElement(name = "binary")
 	public ArrayList<Binary> getBinaries() {
 		return binaries;
-	}
-
-	public void setBinaries(ArrayList<Binary> binaries) {
-		this.binaries = binaries;
 	}
 }
