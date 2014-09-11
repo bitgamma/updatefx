@@ -23,6 +23,30 @@
  */
 package com.briksoftware.updatefx.core;
 
-public class UpdateFX {
+import java.net.URL;
 
+/**
+ * <p>This is the entry point for the UpdateFX framework.</p>
+ * 
+ * @author Michele Balistreri
+ *
+ */
+public class UpdateFX {
+	private URL updateXML;
+	
+	/**
+	 * Creates and initializes an instance of the UpdateFX class.
+	 * 
+	 * @param updateXML the URL to the XML file describing the updates
+	 */
+	public UpdateFX(URL updateXML) {
+		this.updateXML = updateXML;
+	}
+	
+	/**
+	 * Checks for updates and prompts the user to eventually install them.
+	 */
+	public void checkUpdates() {
+		
+	}
 }
