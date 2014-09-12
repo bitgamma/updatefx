@@ -23,7 +23,9 @@
  */
 package com.briksoftware.updatefx.core;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 
 /**
  * <p>This is the entry point for the UpdateFX framework.</p>
@@ -33,16 +35,60 @@ import java.net.URL;
  */
 public class UpdateFX {
 	private URL updateXML;
+	private String releaseID;
+	private String version;
 	
 	/**
 	 * Creates and initializes an instance of the UpdateFX class.
 	 * 
 	 * @param updateXML the URL to the XML file describing the updates
+	 * @param releaseID the ID of the current release
+	 * @param version the human readable version string
 	 */
-	public UpdateFX(URL updateXML) {
+	public UpdateFX(URL updateXML, String releaseID, String version) {
 		this.updateXML = updateXML;
+		this.releaseID = releaseID;
+		this.version = version;
 	}
 	
+	/**
+	 * Creates and initializes an instance of the UpdateFX class.
+	 * 
+	 * @param propertyFile the property file containing the options
+	 * @throws IOException malformed URL
+	 */
+	public UpdateFX(Properties propertyFile) throws IOException {
+		this(new URL(propertyFile.getProperty("app.updatefx.url")), propertyFile.getProperty("app.release"), propertyFile.getProperty("app.version"));
+	}
+	
+	/**
+	 * Creates and initializes an instance of the UpdateFX class.
+	 * 
+	 * @param applicationMain the main class of the application, where app-info.properties will be looked for
+	 * @throws IOException
+	 */
+	public UpdateFX(Class<?> applicationMain) throws IOException {
+		this(getPropertiesForApp(applicationMain));
+	}
+	
+	private static Properties getPropertiesForApp(Class<?> applicationMain) throws IOException {
+		Properties properties = new Properties();
+		properties.load(applicationMain.getResourceAsStream("app-info.properties"));
+		return properties;
+	}
+	
+	public URL getUpdateXML() {
+		return updateXML;
+	}
+
+	public String getReleaseID() {
+		return releaseID;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
 	/**
 	 * Checks for updates and prompts the user to eventually install them.
 	 */
