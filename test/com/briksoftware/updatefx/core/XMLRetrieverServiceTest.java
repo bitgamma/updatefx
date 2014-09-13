@@ -35,6 +35,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.briksoftware.updatefx.model.Application;
+import com.briksoftware.updatefx.model.Release;
 
 import de.saxsys.javafx.test.JfxRunner;
 
@@ -60,6 +61,11 @@ public class XMLRetrieverServiceTest {
 		assertEquals(result.state, Worker.State.SUCCEEDED);
 		assertNotNull(result.serviceResult);
 		assertEquals(result.serviceResult.getName(), "Example App");
+		assertEquals(result.serviceResult.getReleases().size(), 2);
+		
+		for (Release release : result.serviceResult.getReleases()) {
+			assertEquals(release.getApplication(), result.serviceResult);
+		}
 	}
 	
 	@Test

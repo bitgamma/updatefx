@@ -35,8 +35,9 @@ import java.util.Properties;
  */
 public class UpdateFX {
 	private URL updateXML;
-	private String releaseID;
+	private int releaseID;
 	private String version;
+	private int licenseVersion;
 	
 	/**
 	 * Creates and initializes an instance of the UpdateFX class.
@@ -44,11 +45,13 @@ public class UpdateFX {
 	 * @param updateXML the URL to the XML file describing the updates
 	 * @param releaseID the ID of the current release
 	 * @param version the human readable version string
+	 * @param licenseVersion the version of the license
 	 */
-	public UpdateFX(URL updateXML, String releaseID, String version) {
+	public UpdateFX(URL updateXML, int releaseID, String version, int licenseVersion) {
 		this.updateXML = updateXML;
 		this.releaseID = releaseID;
 		this.version = version;
+		this.licenseVersion = licenseVersion;
 	}
 	
 	/**
@@ -58,7 +61,11 @@ public class UpdateFX {
 	 * @throws IOException malformed URL
 	 */
 	public UpdateFX(Properties propertyFile) throws IOException {
-		this(new URL(propertyFile.getProperty("app.updatefx.url")), propertyFile.getProperty("app.release"), propertyFile.getProperty("app.version"));
+		this(new URL(propertyFile.getProperty("app.updatefx.url")), 
+				Integer.parseInt(propertyFile.getProperty("app.release")), 
+				propertyFile.getProperty("app.version"), 
+				Integer.parseInt(propertyFile.getProperty("app.licenseVersion"))
+		);
 	}
 	
 	/**
@@ -81,8 +88,12 @@ public class UpdateFX {
 		return updateXML;
 	}
 
-	public String getReleaseID() {
+	public int getReleaseID() {
 		return releaseID;
+	}
+	
+	public int getLicenseVersion() {
+		return licenseVersion;
 	}
 
 	public String getVersion() {
@@ -93,6 +104,11 @@ public class UpdateFX {
 	 * Checks for updates and prompts the user to eventually install them.
 	 */
 	public void checkUpdates() {
-		
+		XMLRetrieverService xmlRetriever = new XMLRetrieverService(getUpdateXML());
+		xmlRetriever.valueProperty().addListener((observable, oldValue, newValue) -> {
+			UpdateFinderService service = new UpdateFinderService(newValue, getReleaseID(), getLicenseVersion());
+			//TODO: set
+			service.start();
+		});
 	}
 }

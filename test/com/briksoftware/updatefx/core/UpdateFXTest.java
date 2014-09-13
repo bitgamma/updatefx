@@ -38,7 +38,8 @@ public class UpdateFXTest {
 	public void setUp() {
 		prop = new Properties();
 		prop.setProperty("app.version", "1.0.0");
-		prop.setProperty("app.release", "201409121916");
+		prop.setProperty("app.release", "10000");
+		prop.setProperty("app.licenseVersion", "1");
 		prop.setProperty("app.updatefx.url", this.getClass().getResource("updatefx.xml").toString());
 	}
 
@@ -46,7 +47,8 @@ public class UpdateFXTest {
 	public void testUpdateFXWithProperties() throws IOException {
 		UpdateFX update = new UpdateFX(prop);
 		assertEquals(update.getVersion(), "1.0.0");
-		assertEquals(update.getReleaseID(), "201409121916");
+		assertEquals(update.getReleaseID(), 10000);
+		assertEquals(update.getLicenseVersion(), 1);
 		assertEquals(update.getUpdateXML(), this.getClass().getResource("updatefx.xml"));
 	}
 	
@@ -54,7 +56,8 @@ public class UpdateFXTest {
 	public void testUpdateFXWithClass() throws IOException {
 		UpdateFX update = new UpdateFX(this.getClass());
 		assertEquals(update.getVersion(), "1.0.0");
-		assertEquals(update.getReleaseID(), "201409121916");
+		assertEquals(update.getReleaseID(), 10000);
+		assertEquals(update.getLicenseVersion(), 1);
 		assertEquals(update.getUpdateXML().toString(), "http://example.com/updatefx.xml");
 	}
 

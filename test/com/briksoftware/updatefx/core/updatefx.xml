@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <application xmlns="http://www.briksoftware.com/updatefx" name="Example App" licenses="http://example.com/licenses.xml" changelog="http://example.com/changelog">
     <releases>
-        <release id="201409111830" version="2.0.0" releaseDate="2014-09-11T18:54:38.124+02:00" licenseVersion="2">
+        <release id="20000" version="2.0.0" releaseDate="2014-09-11T18:54:38.124+02:00" licenseVersion="2">
             <binary href="http://example.com/ExampleSetup200.exe" size="71337" platform="windows">
                 <verification type="hash" algorithm="SHA-256">CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</verification>
             </binary>
@@ -9,7 +9,7 @@
                 <verification type="hash" algorithm="SHA-256">DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</verification>
             </binary>
         </release>
-        <release id="201409111730" version="1.0.0" releaseDate="2014-09-11T17:54:38.124+02:00" licenseVersion="1">
+        <release id="10000" version="1.0.0" releaseDate="2014-09-11T17:54:38.124+02:00" licenseVersion="1">
             <binary href="http://example.com/ExampleSetup.exe" size="31337" platform="windows">
                 <verification type="hash" algorithm="SHA-256">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</verification>
             </binary>

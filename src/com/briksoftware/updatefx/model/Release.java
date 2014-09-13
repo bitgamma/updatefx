@@ -28,27 +28,29 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 
 @XmlType(propOrder = { "id", "version", "licenseVersion", "releaseDate", "binaries" })
 public class Release {
-	private String id;	
+	private int id;	
 	private String version;	
-	private String licenseVersion;	
+	private int licenseVersion;	
 	private Date releaseDate;
 	private ArrayList<Binary> binaries;
+	private Application application;
 	
 	public Release() {
 		binaries = new ArrayList<>();
 	}
 
 	@XmlAttribute(required = true)
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -62,11 +64,11 @@ public class Release {
 	}
 
 	@XmlAttribute
-	public String getLicenseVersion() {
+	public int getLicenseVersion() {
 		return licenseVersion;
 	}
 
-	public void setLicenseVersion(String licenseVersion) {
+	public void setLicenseVersion(int licenseVersion) {
 		this.licenseVersion = licenseVersion;
 	}
 
@@ -82,5 +84,14 @@ public class Release {
 	@XmlElement(name = "binary")
 	public ArrayList<Binary> getBinaries() {
 		return binaries;
+	}
+	
+	@XmlTransient
+	public Application getApplication() {
+		return application;
+	}
+	
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 }
