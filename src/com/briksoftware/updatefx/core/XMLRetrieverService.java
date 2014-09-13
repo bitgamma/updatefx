@@ -36,5 +36,4 @@ public class XMLRetrieverService extends Service<Application> {
 			}
 		};
 	}
-
 }

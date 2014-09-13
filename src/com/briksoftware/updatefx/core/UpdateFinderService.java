@@ -16,6 +16,7 @@ public class UpdateFinderService extends Service<Release> {
 
 	public UpdateFinderService(Application application, int releaseID, int licenseVersion) {
 		this.application = application;
+		this.releaseID = releaseID;
 		this.licenseVersion = licenseVersion;
 	}
 
@@ -35,16 +36,16 @@ public class UpdateFinderService extends Service<Release> {
 						releaseMap.put(release.getLicenseVersion(), release);
 					}
 					
-					if (newestVersion == null || release.getId() > newestVersion.getId()) {
+					if (newestVersion == null || (release.getId() > newestVersion.getId())) {
 						newestVersion = release;
 					}
 				}
 				
 				Release newestForThisLicense = releaseMap.get(licenseVersion);
 				
-				if (newestForThisLicense != null && newestForThisLicense.getId() > releaseID) {
+				if ((newestForThisLicense != null) && (newestForThisLicense.getId() > releaseID)) {
 					return newestForThisLicense;
-				} else if (newestVersion != null && newestVersion.getId() > releaseID) {
+				} else if ((newestVersion != null) && (newestVersion.getId() > releaseID)) {
 					return newestVersion;
 				}
 								
@@ -52,5 +53,4 @@ public class UpdateFinderService extends Service<Release> {
 			}
 		};
 	}
-
 }
