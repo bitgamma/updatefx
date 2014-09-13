@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox prefHeight="475.0" prefWidth="665.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.briksoftware.updatefx.gui.UpdateDialogController">
+   <children>
+      <Label fx:id="infoLabel" prefHeight="114.0" prefWidth="625.0" wrapText="true" />
+      <WebView fx:id="changeView" prefHeight="373.0" prefWidth="761.0" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="417.0" spacing="20.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#ignoreVersion" text="%button.ignore">
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </padding>
+            </Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="%button.cancel">
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </padding>
+            </Button>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#performUpdate" text="%button.ok">
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </padding>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

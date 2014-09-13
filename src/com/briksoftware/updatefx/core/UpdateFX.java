@@ -27,6 +27,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+import com.briksoftware.updatefx.gui.UpdateDialogController;
+
+import javafx.application.Platform;
+
 /**
  * <p>This is the entry point for the UpdateFX framework.</p>
  * 
@@ -105,10 +109,15 @@ public class UpdateFX {
 	 */
 	public void checkUpdates() {
 		XMLRetrieverService xmlRetriever = new XMLRetrieverService(getUpdateXML());
-		xmlRetriever.valueProperty().addListener((observable, oldValue, newValue) -> {
-			UpdateFinderService service = new UpdateFinderService(newValue, getReleaseID(), getLicenseVersion());
-			//TODO: set
+		xmlRetriever.valueProperty().addListener((observable, oldValue, application) -> {
+			UpdateFinderService service = new UpdateFinderService(application, getReleaseID(), getLicenseVersion());
+			service.valueProperty().addListener((obs, oldVal, release) -> {
+				Platform.runLater(() -> UpdateDialogController.showUpdateDialog(release, getReleaseID(), getVersion(), getLicenseVersion()));
+			});
+			
 			service.start();
 		});
+		
+		xmlRetriever.start();
 	}
 }
