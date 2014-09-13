@@ -7,11 +7,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="475.0" prefWidth="665.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.briksoftware.updatefx.gui.UpdateDialogController">
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.briksoftware.updatefx.gui.UpdateDialogController">
    <children>
-      <Label fx:id="infoLabel" prefHeight="114.0" prefWidth="625.0" wrapText="true" />
-      <WebView fx:id="changeView" prefHeight="373.0" prefWidth="761.0" />
+      <Label fx:id="infoLabel" prefWidth="625.0" wrapText="true" />
+      <WebView fx:id="changeView" prefHeight="350.0" prefWidth="625.0" VBox.vgrow="ALWAYS" />
       <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="417.0" spacing="20.0">
          <children>
             <Button mnemonicParsing="false" onAction="#ignoreVersion" text="%button.ignore">

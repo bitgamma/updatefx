@@ -1,7 +1,9 @@
 package com.briksoftware.updatefx.core;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -19,14 +21,20 @@ import de.saxsys.javafx.test.JfxRunner;
 
 @RunWith(JfxRunner.class)
 public class UpdateFinderServiceTest {
-	private Application app = new Application();
-	private Release releaseNewerLicense = new Release();
-	private Release release10002SameLicense = new Release();
-	private Release release10001SameLicense = new Release();
-	private Release release10000SameLicense = new Release();
+	private Application app;
+	private Release releaseNewerLicense;
+	private Release release10002SameLicense;
+	private Release release10001SameLicense;
+	private Release release10000SameLicense;
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
+		app = new Application();
+		releaseNewerLicense = new Release();
+		release10002SameLicense = new Release();
+		release10001SameLicense = new Release();
+		release10000SameLicense = new Release();
+		
 		releaseNewerLicense.setApplication(app);
 		releaseNewerLicense.setId(20000);
 		releaseNewerLicense.setLicenseVersion(2);
