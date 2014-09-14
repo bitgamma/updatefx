@@ -16,6 +16,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import com.briksoftware.updatefx.core.UpdateDownloadService;
 import com.briksoftware.updatefx.model.Release;
 
 public class UpdateDialogController {
@@ -83,18 +84,26 @@ public class UpdateDialogController {
 		infoLabel.autosize();
 	}
 	
-	@FXML
-	public void performUpdate(ActionEvent event) {
-		((Stage) infoLabel.getScene().getWindow()).close();
-	}
-
-	@FXML
-	public void cancel(ActionEvent event) {
+	private void close() {
 		((Stage) infoLabel.getScene().getWindow()).close();		
 	}
 	
 	@FXML
+	public void performUpdate(ActionEvent event) {
+		UpdateDownloadService service = new UpdateDownloadService(release);
+		
+		service.start();
+		close();
+	}
+
+	@FXML
+	public void cancel(ActionEvent event) {
+		close();
+	}
+	
+	@FXML
 	public void ignoreVersion(ActionEvent event) {
-		((Stage) infoLabel.getScene().getWindow()).close();
+		//TODO: implement this feature
+		close();
 	}
 }
