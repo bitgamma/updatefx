@@ -56,22 +56,9 @@ public class UpdateController {
 		}
 	}
 
-	public String byte2Str(double bytes) {
-		double unit = 1024.0;
-		
-		if (bytes < unit) {
-			return bytes + " B";
-		}
-		
-		int exp = (int) (Math.log(bytes) / Math.log(unit));
-		String pre = "kMGTPE".charAt(exp - 1) + "";
-		return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
-	}
-
 	private void initialize() {
 		stepLabel.setText(resources.getString("label.downloading"));
 		service = new UpdateDownloadService(release);
-		updateProgressLabel();
 
 		service.workDoneProperty().addListener((observable, oldValue, newValue) -> {
 			progressBar.setProgress(service.getWorkDone() / service.getTotalWork());
@@ -96,6 +83,18 @@ public class UpdateController {
 		});
 		
 		service.start();
+	}
+	
+	private String byte2Str(double bytes) {
+		double unit = 1024.0;
+		
+		if (bytes < unit) {
+			return bytes + " B";
+		}
+		
+		int exp = (int) (Math.log(bytes) / Math.log(unit));
+		String pre = "kMGTPE".charAt(exp - 1) + "";
+		return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
 	}
 	
 	private void updateProgressLabel() {
