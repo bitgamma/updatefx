@@ -54,7 +54,7 @@ public class UpdateDownloadService extends Service<File> {
 				if (fileName != null && fileName.indexOf("=") != -1) {
 					fileName = fileName.split("=")[1];
 				} else {
-					fileName = toDownload.getHref().getPath().substring(1);
+					fileName = new File(toDownload.getHref().getPath()).getName();
 				}
 
 				File downloadFile = new File(new File(System.getProperty("java.io.tmpdir")), fileName);
@@ -78,11 +78,11 @@ public class UpdateDownloadService extends Service<File> {
 	}
 
 	private boolean isCurrentPlatform(Platform platform) {
-		String currentPlatform = System.getProperty("os.name");
-		
-		if (currentPlatform.startsWith("Mac")) {
+		String currentPlatform = System.getProperty("os.name").toLowerCase();
+
+		if (currentPlatform.startsWith("mac")) {
 			return platform == Platform.mac;
-		} else if (currentPlatform.startsWith("Windows")) {
+		} else if (currentPlatform.startsWith("windows")) {
 			return platform == Platform.windows;
 		} else {
 			throw new IllegalStateException("UpdateFX does not support this platform");
