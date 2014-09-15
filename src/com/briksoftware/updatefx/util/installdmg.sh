@@ -23,3 +23,5 @@ popd > /dev/null
 /usr/bin/hdiutil detach -quiet /Volumes/$TMP_NAME
 /bin/rm /tmp/$TMP_NAME.cdr
 /bin/rm "$DMG_FILE"
+
+open -a "/Applications/$app"
