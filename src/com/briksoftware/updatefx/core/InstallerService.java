@@ -29,6 +29,9 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
+import com.briksoftware.updatefx.util.PIDUtil;
+import com.briksoftware.updatefx.util.ScriptUtil;
+
 public class InstallerService extends Service<Void> {
 	private Path installer;
 	public InstallerService(Path installer) {
@@ -68,17 +71,17 @@ public class InstallerService extends Service<Void> {
 		};
 	}
 
-	private void handleDMGInstallation() {
+	private void handleDMGInstallation() throws Exception {
+		Path tmpScript = ScriptUtil.copyScript("installdmg.sh");
+		new ProcessBuilder("/bin/sh", tmpScript.toAbsolutePath().toString(), installer.toAbsolutePath().toString(), String.format("%d", PIDUtil.getPID())).start();
+	}
+	
+	private void handleEXEInstallation() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void handleEXEInstallation() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private void handleMSIInstallation() {
+	private void handleMSIInstallation() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
