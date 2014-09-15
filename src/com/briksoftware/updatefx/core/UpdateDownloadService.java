@@ -1,10 +1,13 @@
 package com.briksoftware.updatefx.core;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -13,7 +16,7 @@ import com.briksoftware.updatefx.model.Binary;
 import com.briksoftware.updatefx.model.Platform;
 import com.briksoftware.updatefx.model.Release;
 
-public class UpdateDownloadService extends Service<File> {
+public class UpdateDownloadService extends Service<Path> {
 	private Release release;
 
 	public UpdateDownloadService(Release release) {
@@ -21,10 +24,10 @@ public class UpdateDownloadService extends Service<File> {
 	}
 
 	@Override
-	protected Task<File> createTask() {
-		return new Task<File>() {
+	protected Task<Path> createTask() {
+		return new Task<Path>() {
 			@Override
-			protected File call() throws Exception {
+			protected Path call() throws Exception {
 				Binary toDownload = null;
 
 				for (Binary binary : release.getBinaries()) {
@@ -54,12 +57,12 @@ public class UpdateDownloadService extends Service<File> {
 				if (fileName != null && fileName.indexOf("=") != -1) {
 					fileName = fileName.split("=")[1];
 				} else {
-					fileName = new File(toDownload.getHref().getPath()).getName();
+					fileName = Paths.get((toDownload.getHref().getPath())).getFileName().toString();
 				}
 
-				File downloadFile = new File(new File(System.getProperty("java.io.tmpdir")), fileName);
+				Path downloadFile = Paths.get(System.getProperty("java.io.tmpdir"), fileName);
 				
-				try(FileOutputStream fos = new FileOutputStream(downloadFile); 
+				try(OutputStream fos = Files.newOutputStream(downloadFile, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE); 
 						BufferedInputStream is = new BufferedInputStream(connection.getInputStream())) {
 					byte[] buffer = new byte[512];
 					int n = -1;

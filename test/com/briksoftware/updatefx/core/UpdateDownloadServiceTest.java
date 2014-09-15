@@ -1,9 +1,13 @@
 package com.briksoftware.updatefx.core;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -45,7 +49,7 @@ public class UpdateDownloadServiceTest {
 
 	@Test
 	public void testServiceBinaryFoundNoVerification() throws Exception {
-		CompletableFuture<ServiceTestResults<File>> serviceStateDoneFuture = new CompletableFuture<>();
+		CompletableFuture<ServiceTestResults<Path>> serviceStateDoneFuture = new CompletableFuture<>();
 		UpdateDownloadService service = new UpdateDownloadService(releaseNoVerification);
 
 		service.stateProperty().addListener((observable, oldValue, newValue) -> {
@@ -56,17 +60,17 @@ public class UpdateDownloadServiceTest {
 		
 		service.start();
 
-		ServiceTestResults<File> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
+		ServiceTestResults<Path> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
 
 		assertNull(result.exception);
 		assertEquals(result.state, Worker.State.SUCCEEDED);
-		assertEquals(result.serviceResult, new File(new File(System.getProperty("java.io.tmpdir")), "updatefx.xml"));
-		result.serviceResult.delete();
+		assertEquals(result.serviceResult, Paths.get(System.getProperty("java.io.tmpdir"), "updatefx.xml"));
+		Files.delete(result.serviceResult);
 	}
 	
 	@Test
 	public void testServiceBinaryNotFound() throws Exception {
-		CompletableFuture<ServiceTestResults<File>> serviceStateDoneFuture = new CompletableFuture<>();
+		CompletableFuture<ServiceTestResults<Path>> serviceStateDoneFuture = new CompletableFuture<>();
 		UpdateDownloadService service = new UpdateDownloadService(emptyRelease);
 
 		service.stateProperty().addListener((observable, oldValue, newValue) -> {
@@ -77,7 +81,7 @@ public class UpdateDownloadServiceTest {
 		
 		service.start();
 
-		ServiceTestResults<File> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
+		ServiceTestResults<Path> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
 
 		assertThat(result.exception, instanceOf(IllegalArgumentException.class));
 		assertEquals(result.state, Worker.State.FAILED);
