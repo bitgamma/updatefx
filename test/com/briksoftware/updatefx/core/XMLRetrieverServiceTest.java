@@ -55,7 +55,7 @@ public class XMLRetrieverServiceTest {
 		
 		service.start();
 		
-		ServiceTestResults<Application> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS); 
+		ServiceTestResults<Application> result = serviceStateDoneFuture.get(1000, TimeUnit.MILLISECONDS); 
 
 		assertNull(result.exception);
 		assertEquals(result.state, Worker.State.SUCCEEDED);
@@ -81,7 +81,7 @@ public class XMLRetrieverServiceTest {
 		
 		service.start();
 		
-		ServiceTestResults<Application> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS); 
+		ServiceTestResults<Application> result = serviceStateDoneFuture.get(1000, TimeUnit.MILLISECONDS); 
 
 		assertNotNull(result.exception);
 		assertEquals(result.state, Worker.State.FAILED);

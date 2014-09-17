@@ -30,5 +30,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public enum Platform {
 	mac,
-	windows;
+	win_x86,
+	win_x64;
 }

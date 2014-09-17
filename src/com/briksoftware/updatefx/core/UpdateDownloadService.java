@@ -80,7 +80,14 @@ public class UpdateDownloadService extends Service<Path> {
 				if (fileName != null && fileName.indexOf("=") != -1) {
 					fileName = fileName.split("=")[1];
 				} else {
-					fileName = Paths.get((toDownload.getHref().getPath())).getFileName().toString();
+					String url = toDownload.getHref().getPath();
+					int lastSlashIdx = url.lastIndexOf('/');
+					
+					if (lastSlashIdx >= 0) {						
+						fileName = url.substring(lastSlashIdx + 1, url.length());
+					} else {
+						fileName = url;
+					}
 				}
 
 				Path downloadFile = Paths.get(System.getProperty("java.io.tmpdir"), fileName);
@@ -109,7 +116,11 @@ public class UpdateDownloadService extends Service<Path> {
 		if (currentPlatform.startsWith("mac")) {
 			return platform == Platform.mac;
 		} else if (currentPlatform.startsWith("windows")) {
-			return platform == Platform.windows;
+			if (System.getProperty("os.arch").contains("64")) {
+				return platform == Platform.win_x64;
+			} else {
+				return platform == Platform.win_x86;
+			}
 		} else {
 			throw new IllegalStateException("UpdateFX does not support this platform");
 		}

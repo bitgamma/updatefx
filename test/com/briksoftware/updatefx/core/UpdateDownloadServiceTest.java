@@ -60,12 +60,17 @@ public class UpdateDownloadServiceTest {
 		mac.setPlatform(Platform.mac);
 		mac.setHref(this.getClass().getResource("updatefx.xml"));
 		
-		Binary windows = new Binary();
-		windows.setPlatform(Platform.windows);
-		windows.setHref(this.getClass().getResource("updatefx.xml"));
+		Binary win_x86 = new Binary();
+		win_x86.setPlatform(Platform.win_x86);
+		win_x86.setHref(this.getClass().getResource("updatefx.xml"));
+		
+		Binary win_x64 = new Binary();
+		win_x64.setPlatform(Platform.win_x64);
+		win_x64.setHref(this.getClass().getResource("updatefx.xml"));
 		
 		releaseNoVerification.getBinaries().add(mac);
-		releaseNoVerification.getBinaries().add(windows);
+		releaseNoVerification.getBinaries().add(win_x86);
+		releaseNoVerification.getBinaries().add(win_x64);
 		
 		emptyRelease = new Release();
 	}
@@ -104,7 +109,7 @@ public class UpdateDownloadServiceTest {
 		
 		service.start();
 
-		ServiceTestResults<Path> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
+		ServiceTestResults<Path> result = serviceStateDoneFuture.get(1000, TimeUnit.MILLISECONDS);
 
 		assertThat(result.exception, instanceOf(IllegalArgumentException.class));
 		assertEquals(result.state, Worker.State.FAILED);

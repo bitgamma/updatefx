@@ -10,7 +10,7 @@
             </binary>
         </release>
         <release id="10000" version="1.0.0" releaseDate="2014-09-11T17:54:38.124+02:00" licenseVersion="1">
-            <binary href="http://example.com/ExampleSetup.exe" size="31337" platform="windows">
+            <binary href="http://example.com/ExampleSetup.exe" size="31337" platform="win_x64">
                 <verification type="hash" algorithm="SHA-256">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</verification>
             </binary>
             <binary href="http://example.com/Example.dmg" size="31337" platform="mac">
