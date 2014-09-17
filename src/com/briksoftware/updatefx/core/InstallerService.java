@@ -77,8 +77,7 @@ public class InstallerService extends Service<Void> {
 	}
 	
 	private void handleEXEInstallation() throws Exception {
-		// TODO Auto-generated method stub
-		
+		new ProcessBuilder(installer.toAbsolutePath().toString(), "/SILENT", "/SP-", "/SUPPRESSMSGBOXES").start();
 	}
 	
 	private void handleMSIInstallation() throws Exception {
