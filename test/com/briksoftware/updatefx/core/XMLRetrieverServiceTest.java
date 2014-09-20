@@ -58,13 +58,13 @@ public class XMLRetrieverServiceTest {
 		ServiceTestResults<Application> result = serviceStateDoneFuture.get(1000, TimeUnit.MILLISECONDS); 
 
 		assertNull(result.exception);
-		assertEquals(result.state, Worker.State.SUCCEEDED);
+		assertEquals(Worker.State.SUCCEEDED, result.state);
 		assertNotNull(result.serviceResult);
-		assertEquals(result.serviceResult.getName(), "Example App");
-		assertEquals(result.serviceResult.getReleases().size(), 2);
+		assertEquals("Example App", result.serviceResult.getName());
+		assertEquals(2, result.serviceResult.getReleases().size());
 		
 		for (Release release : result.serviceResult.getReleases()) {
-			assertEquals(release.getApplication(), result.serviceResult);
+			assertEquals(result.serviceResult, release.getApplication());
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class XMLRetrieverServiceTest {
 		ServiceTestResults<Application> result = serviceStateDoneFuture.get(1000, TimeUnit.MILLISECONDS); 
 
 		assertNotNull(result.exception);
-		assertEquals(result.state, Worker.State.FAILED);
+		assertEquals(Worker.State.FAILED, result.state);
 		assertNull(result.serviceResult);
 	}
 }

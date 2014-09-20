@@ -31,17 +31,17 @@ public class PIDUtilTest {
 
 	@Test
 	public void testGetPID() {
-		assertNotEquals(PIDUtil.getPID(), 0);
+		assertNotEquals(0, PIDUtil.getPID());
 	}
 
 	@Test
 	public void testGetPIDByRuntimeName() {
-		assertNotEquals(PIDUtil.getPIDByRuntimeName(), 0);
+		assertNotEquals(0, PIDUtil.getPIDByRuntimeName());
 	}
 
 	@Test
 	public void testGetPIDForOracleJVM() throws Exception {
-		assertNotEquals(PIDUtil.getPIDForOracleJVM(), 0);
+		assertNotEquals(0, PIDUtil.getPIDForOracleJVM());
 	}
 
 }

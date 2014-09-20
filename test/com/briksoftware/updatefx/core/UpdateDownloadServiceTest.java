@@ -91,8 +91,8 @@ public class UpdateDownloadServiceTest {
 		ServiceTestResults<Path> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
 
 		assertNull(result.exception);
-		assertEquals(result.state, Worker.State.SUCCEEDED);
-		assertEquals(result.serviceResult, Paths.get(System.getProperty("java.io.tmpdir"), "updatefx.xml"));
+		assertEquals(Worker.State.SUCCEEDED, result.state);
+		assertEquals(Paths.get(System.getProperty("java.io.tmpdir"), "updatefx.xml"), result.serviceResult);
 		Files.delete(result.serviceResult);
 	}
 	
@@ -112,7 +112,7 @@ public class UpdateDownloadServiceTest {
 		ServiceTestResults<Path> result = serviceStateDoneFuture.get(1000, TimeUnit.MILLISECONDS);
 
 		assertThat(result.exception, instanceOf(IllegalArgumentException.class));
-		assertEquals(result.state, Worker.State.FAILED);
+		assertEquals(Worker.State.FAILED, result.state);
 		assertNull(result.serviceResult);
 	}
 }

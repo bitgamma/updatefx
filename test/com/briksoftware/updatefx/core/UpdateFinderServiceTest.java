@@ -96,8 +96,8 @@ public class UpdateFinderServiceTest {
 		ServiceTestResults<Release> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
 
 		assertNull(result.exception);
-		assertEquals(result.state, Worker.State.SUCCEEDED);
-		assertEquals(result.serviceResult, release10002SameLicense);
+		assertEquals(Worker.State.SUCCEEDED, result.state);
+		assertEquals(release10002SameLicense, result.serviceResult);
 	}
 	
 	@Test
@@ -116,8 +116,8 @@ public class UpdateFinderServiceTest {
 		ServiceTestResults<Release> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
 
 		assertNull(result.exception);
-		assertEquals(result.state, Worker.State.SUCCEEDED);
-		assertEquals(result.serviceResult, releaseNewerLicense);
+		assertEquals(Worker.State.SUCCEEDED, result.state);
+		assertEquals(releaseNewerLicense, result.serviceResult);
 	}
 	
 	@Test
@@ -136,7 +136,7 @@ public class UpdateFinderServiceTest {
 		ServiceTestResults<Release> result = serviceStateDoneFuture.get(200, TimeUnit.MILLISECONDS);
 
 		assertThat(result.exception, instanceOf(NoUpdateException.class));
-		assertEquals(result.state, Worker.State.FAILED);
+		assertEquals(Worker.State.FAILED, result.state);
 		assertNull(result.serviceResult);
 	}
 }

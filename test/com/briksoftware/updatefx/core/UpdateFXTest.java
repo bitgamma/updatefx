@@ -46,19 +46,19 @@ public class UpdateFXTest {
 	@Test
 	public void testUpdateFXWithProperties() throws IOException {
 		UpdateFX update = new UpdateFX(prop);
-		assertEquals(update.getVersion(), "1.0.0");
-		assertEquals(update.getReleaseID(), 10000);
-		assertEquals(update.getLicenseVersion(), 1);
-		assertEquals(update.getUpdateXML(), this.getClass().getResource("updatefx.xml"));
+		assertEquals("1.0.0", update.getVersion());
+		assertEquals(10000, update.getReleaseID());
+		assertEquals(1, update.getLicenseVersion());
+		assertEquals(this.getClass().getResource("updatefx.xml"), update.getUpdateXML());
 	}
 	
 	@Test
 	public void testUpdateFXWithClass() throws IOException {
 		UpdateFX update = new UpdateFX(this.getClass());
-		assertEquals(update.getVersion(), "1.0.0");
-		assertEquals(update.getReleaseID(), 10000);
-		assertEquals(update.getLicenseVersion(), 1);
-		assertEquals(update.getUpdateXML().toString(), "http://example.com/updatefx.xml");
+		assertEquals("1.0.0", update.getVersion());
+		assertEquals(10000, update.getReleaseID());
+		assertEquals(1, update.getLicenseVersion());
+		assertEquals("http://example.com/updatefx.xml", update.getUpdateXML().toString());
 	}
 
 }
