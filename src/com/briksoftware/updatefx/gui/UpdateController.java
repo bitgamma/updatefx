@@ -59,7 +59,7 @@ public class UpdateController {
 
 	public static void performUpdate(Release release) {
 		try {
-			ResourceBundle i18nBundle = ResourceBundle.getBundle("com.briksoftware.updatefx.gui.UpdateProgressDialog");
+			ResourceBundle i18nBundle = ResourceBundle.getBundle("com.briksoftware.updatefx.gui.i18n.UpdateProgressDialog");
 
 			FXMLLoader loader = new FXMLLoader(UpdateController.class.getResource("UpdateProgressDialog.fxml"), i18nBundle);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());

@@ -55,7 +55,7 @@ public class UpdateDialogController {
 	
 	public static void showUpdateDialog(Release release, int currentReleaseID, String currentVersion, int currentLicenseVersion) {
 		try {
-			ResourceBundle i18nBundle = ResourceBundle.getBundle("com.briksoftware.updatefx.gui.UpdateDialog");
+			ResourceBundle i18nBundle = ResourceBundle.getBundle("com.briksoftware.updatefx.gui.i18n.UpdateDialog");
 			
 			FXMLLoader loader = new FXMLLoader(UpdateDialogController.class.getResource("UpdateDialog.fxml"), i18nBundle);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
