@@ -45,7 +45,7 @@ public class UpdateFXTest {
 
 	@Test
 	public void testUpdateFXWithProperties() throws IOException {
-		UpdateFX update = new UpdateFX(prop);
+		UpdateFX update = new UpdateFX(prop, null);
 		assertEquals("1.0.0", update.getVersion());
 		assertEquals(10000, update.getReleaseID());
 		assertEquals(1, update.getLicenseVersion());

@@ -23,6 +23,7 @@
  */
 package com.briksoftware.updatefx.gui;
 
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -57,7 +58,7 @@ public class UpdateController {
 	private Release release;
 	private UpdateDownloadService service;
 
-	public static void performUpdate(Release release) {
+	public static void performUpdate(Release release, URL css) {
 		try {
 			ResourceBundle i18nBundle = ResourceBundle.getBundle("com.briksoftware.updatefx.gui.i18n.UpdateProgressDialog");
 
@@ -69,6 +70,10 @@ public class UpdateController {
 			controller.initialize();
 
 			Scene scene = new Scene(page);
+			if (css != null) {
+				scene.getStylesheets().add(css.toExternalForm());
+			}
+			
 			final Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.show();

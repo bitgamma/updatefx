@@ -52,8 +52,9 @@ public class UpdateDialogController {
 	private int currentReleaseID;
 	private String currentVersion;
 	private int currentLicenseVersion;
+	private URL css;
 	
-	public static void showUpdateDialog(Release release, int currentReleaseID, String currentVersion, int currentLicenseVersion) {
+	public static void showUpdateDialog(Release release, int currentReleaseID, String currentVersion, int currentLicenseVersion, URL css) {
 		try {
 			ResourceBundle i18nBundle = ResourceBundle.getBundle("com.briksoftware.updatefx.gui.i18n.UpdateDialog");
 			
@@ -65,9 +66,14 @@ public class UpdateDialogController {
 			controller.currentReleaseID = currentReleaseID;
 			controller.currentVersion = currentVersion;
 			controller.currentLicenseVersion = currentLicenseVersion;
+			controller.css = css;
 			controller.initialize();
 			
 			Scene scene = new Scene(page);
+			if (css != null) {
+				scene.getStylesheets().add(css.toExternalForm());
+			}
+			
 			final Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.show();
@@ -110,7 +116,7 @@ public class UpdateDialogController {
 	
 	@FXML
 	public void performUpdate(ActionEvent event) {
-		UpdateController.performUpdate(release);
+		UpdateController.performUpdate(release, css);
 		close();
 	}
 
