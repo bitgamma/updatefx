@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="TOP_RIGHT" spacing="15.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      fx:controller="com.briksoftware.updatefx.gui.UpdateController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+   </padding>
+   <Label fx:id="stepLabel" prefWidth="350.0"/>
+   <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="350.0" progress="0.0"/>
+   <Label fx:id="progressLabel" alignment="CENTER_RIGHT" prefWidth="350.0"/>
+   <Button fx:id="actionButton" cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="%button.cancel">
+      <VBox.margin>
+         <Insets/>
+      </VBox.margin>
+   </Button>
+</VBox>
