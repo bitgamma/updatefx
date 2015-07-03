@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'com.briksoftware'
+version = 1.0
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  testCompile 'com.btmatthews.hamcrest:hamcrest-matchers:1.0.1'
+  testCompile 'junit:junit:4.12'
+  testCompile 'de.saxsys:jfx-testrunner:1.1'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+publishing {
+  publications {
+    updatefx(MavenPublication) {
+      from components.java
+    }
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.4'
+}
