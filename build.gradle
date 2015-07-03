@@ -1,5 +1,9 @@
+plugins {
+  id "com.jfrog.bintray" version "1.2"
+}
+
 apply plugin: 'java'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 group = 'com.briksoftware'
 version = 1.0
@@ -17,14 +21,40 @@ dependencies {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-publishing {
-  publications {
-    updatefx(MavenPublication) {
-      from components.java
-    }
-  }
-}
 
 task wrapper(type: Wrapper) {
   gradleVersion = '2.4'
+}
+
+task sourceJar(type: Jar) {
+  from sourceSets.main.allSource
+  classifier = 'sources'
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourceJar
+  archives javadocJar
+}
+
+bintray {
+  user = bintray_user
+  key = bintray_api_key
+
+  configurations = ['archives']
+  pkg {
+    repo = 'maven'
+    name = 'updatefx'
+    publish = true
+    publicDownloadNumbers = true
+    version {
+      gpg {
+        sign = true
+        passphrase = bintray_gpg_password
+      }
+    }
+  }
 }

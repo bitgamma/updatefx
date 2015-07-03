@@ -81,7 +81,7 @@ public class UpdateFX {
 	 * Creates and initializes an instance of the UpdateFX class.
 	 * 
 	 * @param applicationMain the main class of the application, where app-info.properties will be looked for
-	 * @throws IOException
+	 * @throws IOException error reading property or css file
 	 */
 	public UpdateFX(Class<?> applicationMain) throws IOException {
 		this(getPropertiesForApp(applicationMain), getCSSForApp(applicationMain));
