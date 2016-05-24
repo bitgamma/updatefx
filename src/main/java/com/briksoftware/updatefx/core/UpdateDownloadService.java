@@ -54,7 +54,7 @@ public class UpdateDownloadService extends Service<Path> {
 				Binary toDownload = null;
 
 				for (Binary binary : release.getBinaries()) {
-					if (isCurrentPlatform(binary.getPlatform())) {
+					if (isCurrentPlatform(binary.getPlatform()) || binary.getPlatform() == Platform.independent) {
 						toDownload = binary;
 						break;
 					}
